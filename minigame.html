@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Metzgerei Orsch – Wurstfang</title>
+<style>
+body{
+    text-align:center;
+    background:#ffe5e5;
+    font-family:Arial;
+}
+
+#game{
+    background:white;
+    border:3px solid #b30000;
+    display:block;
+    margin:auto;
+}
+
+h1{
+    color:#b30000;
+}
+</style>
+</head>
+<body>
+
+<h1>🍑 Metzgerei Orsch – Wurstfang 🌭</h1>
+<p>Fange die Würste mit dem Orsch!</p>
+<canvas id="game" width="400" height="500"></canvas>
+<p>Punkte: <span id="score">0</span></p>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+let player = {x:180,y:450,width:60,height:30};
+let sausages = [];
+let score = 0;
+
+document.addEventListener("mousemove", e=>{
+    let rect = canvas.getBoundingClientRect();
+    player.x = e.clientX - rect.left - player.width/2;
+});
+
+function spawnSausage(){
+    sausages.push({
+        x:Math.random()*360,
+        y:-20,
+        width:40,
+        height:20
+    });
+}
+
+setInterval(spawnSausage,1000);
+
+function update(){
+    ctx.clearRect(0,0,400,500);
+
+    // player (arsch)
+    ctx.fillStyle="#ff9999";
+    ctx.fillRect(player.x,player.y,player.width,player.height);
+
+    sausages.forEach((s,i)=>{
+        s.y+=3;
+
+        ctx.fillStyle="brown";
+        ctx.fillRect(s.x,s.y,s.width,s.height);
+
+        // collision
+        if(
+            s.y+20>player.y &&
+            s.x < player.x+player.width &&
+            s.x+40 > player.x
+        ){
+            sausages.splice(i,1);
+            score++;
+            document.getElementById("score").innerText=score;
+        }
+
+        if(s.y>500){
+            sausages.splice(i,1);
+        }
+    });
+
+    requestAnimationFrame(update);
+}
+
+update();
+</script>
+
+</body>
+</html>
