@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Metzgerei Orsch – Wurstfang</title>
+
 <style>
 body{
     text-align:center;
     background:#ffe5e5;
     font-family:Arial;
+
+    /* Hintern-Cursor */
+    cursor: url("hintern.png") 16 16, auto;
 }
 
 #game{
@@ -21,12 +25,15 @@ h1{
     color:#b30000;
 }
 </style>
+
 </head>
 <body>
 
 <h1>🍑 Metzgerei Orsch – Wurstfang 🌭</h1>
 <p>Fange die Würste mit dem Orsch!</p>
+
 <canvas id="game" width="400" height="500"></canvas>
+
 <p>Punkte: <span id="score">0</span></p>
 
 <script>
@@ -56,7 +63,7 @@ setInterval(spawnSausage,1000);
 function update(){
     ctx.clearRect(0,0,400,500);
 
-    // player (arsch)
+    // Orsch
     ctx.fillStyle="#ff9999";
     ctx.fillRect(player.x,player.y,player.width,player.height);
 
@@ -66,7 +73,6 @@ function update(){
         ctx.fillStyle="brown";
         ctx.fillRect(s.x,s.y,s.width,s.height);
 
-        // collision
         if(
             s.y+20>player.y &&
             s.x < player.x+player.width &&
