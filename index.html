@@ -12,15 +12,30 @@ body {
     align-items: center;
     height: 100vh;
 }
-img {
-    max-width: 100%;
-    height: auto;
+
+.container {
+    position: relative;
+}
+
+.logo {
+    display: block;
+}
+
+.herz {
+    position: absolute;
+    top: 48%;
+    left: 19.5%;
+    transform: translate(-50%, -50%);
 }
 </style>
 </head>
 <body>
-    <img src="logo.png" alt="Metzgerei Logo">
+    <div class="container">
+        <img src="logo.png" alt="Metzgerei Logo" class="logo">
+        
+        <a href="https://metzgerei-orsch.de/minigame.html">
+            <img src="herz.png" alt="Herz" class="herz">
+        </a>
+    </div>
 </body>
-
 </html>
-
