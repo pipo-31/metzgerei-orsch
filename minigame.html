@@ -9,6 +9,7 @@ body{
     text-align:center;
     background:#ffe5e5;
     font-family:Arial;
+    cursor: default;
 }
 
 #game{
@@ -16,7 +17,6 @@ body{
     border:3px solid #b30000;
     display:block;
     margin:auto;
-    cursor: url("hintern.png") 16 16, auto;
 }
 
 h1{
@@ -38,11 +38,15 @@ h1{
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-let player = {x:180,y:450,width:60,height:30};
+let player = {x:180,y:430,width:80,height:60};
 let sausages = [];
 let score = 0;
 
-// Wurstbild laden
+//Hintern laden
+const buttImg = new Image();
+buttImg.src = "hintern.png";
+
+//Wurst laden
 const sausageImg = new Image();
 sausageImg.src = "wurst.png";
 
@@ -65,14 +69,13 @@ setInterval(spawnSausage,1000);
 function update(){
     ctx.clearRect(0,0,400,500);
 
-    // Orsch (noch Rechteck)
-    ctx.fillStyle="#ff9999";
-    ctx.fillRect(player.x,player.y,player.width,player.height);
+    //Spieler zeichnen
+    ctx.drawImage(buttImg, player.x, player.y, player.width, player.height);
 
     sausages.forEach((s,i)=>{
         s.y+=3;
 
-        // Wurst zeichnen
+        //Wurst zeichnen
         ctx.drawImage(sausageImg, s.x, s.y, s.width, s.height);
 
         // Kollision
